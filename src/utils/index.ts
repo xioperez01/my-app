@@ -17,4 +17,7 @@ const buildSearchParams = (
   return newParams.toString();
 };
 
-export { buildSearchParams };
+const cn = (...classes: (string | undefined)[]) =>
+  classes.filter(Boolean).join(" ");
+
+export { buildSearchParams, cn };
