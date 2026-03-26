@@ -1,0 +1,39 @@
+/* SIZES */
+
+.textXs {
+  font-size: var(--font-xs);
+}
+.textSm {
+  font-size: var(--font-sm);
+}
+.textMd {
+  font-size: var(--font-md);
+}
+.textLg {
+  font-size: var(--font-lg);
+}
+.textXl {
+  font-size: var(--font-xl);
+}
+.text2Xl {
+  font-size: var(--font-2xl);
+}
+
+/* COMPONENTS */
+
+.subtitle {
+  font-weight: 500;
+  font-style: normal;
+}
+
+.textDanger {
+  color: var(--color-danger);
+}
+
+.textHeader {
+  color: var(--color-text-headers);
+}
+
+.textParagraph {
+  color: var(--foreground);
+}
