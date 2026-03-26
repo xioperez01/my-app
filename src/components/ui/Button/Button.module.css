@@ -1,0 +1,123 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  transition: all 0.2s ease;
+}
+
+/* VARIANTS */
+.solid {
+  border: none;
+  color: white;
+}
+
+.outline {
+  background: transparent;
+}
+
+.ghost {
+  background: transparent;
+  border: none;
+}
+
+/* COLOR SCHEMES */
+
+/* PRIMARY */
+.primary.solid {
+  background: var(--color-primary);
+}
+
+.primary.solid:hover {
+  background: var(--blue-500);
+}
+
+.primary.outline {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.primary.outline:hover {
+  background: var(--blue-50);
+}
+
+.primary.ghost {
+  color: var(--color-primary);
+}
+
+.primary.ghost:hover {
+  background: var(--blue-50);
+}
+
+/* DANGER */
+.danger.solid {
+  background: var(--color-error);
+}
+
+.danger.solid:hover {
+  opacity: 0.9;
+}
+
+.danger.outline {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.danger.outline:hover {
+  background: rgba(246, 117, 116, 0.1);
+}
+
+.danger.ghost {
+  color: var(--color-error);
+}
+
+.danger.ghost:hover {
+  background: rgba(246, 117, 116, 0.1);
+}
+
+/* NEUTRAL */
+.neutral.solid {
+  background: var(--color-gray-100);
+  color: var(--color-gray-700);
+}
+
+.neutral.solid:hover {
+  background: var(--color-gray-200);
+}
+
+.neutral.outline {
+  border-color: var(--color-gray-300);
+  color: var(--color-gray-700);
+}
+
+.neutral.outline:hover {
+  background: var(--color-gray-100);
+}
+
+.neutral.ghost {
+  color: var(--color-gray-700);
+}
+
+.neutral.ghost:hover {
+  background: var(--color-gray-100);
+}
+
+/* ICON */
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+/* OPTIONAL: compact ghost buttons */
+.button.ghost {
+  padding: 8px 12px;
+}
