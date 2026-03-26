@@ -85,6 +85,10 @@ p {
   font-size: var(--font-md);
   color: var(--foreground);
 }
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+}
 
 @media (prefers-color-scheme: dark) {
   html {
