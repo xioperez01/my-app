@@ -2,7 +2,9 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 import { useState } from "react";
-import { buildSearchParams } from "@/utils";
+import { buildSearchParams, cn } from "@/utils";
+import typography from "@/styles/typography.module.css";
+import { Button } from "@/components/ui/Button/Button";
 
 export default function Home() {
   const router = useRouter();
@@ -11,6 +13,12 @@ export default function Home() {
 
   const [validation, setValidation] = useState<string | undefined>();
 
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+    if (validation) {
+      setValidation(undefined);
+    }
+  };
   const handleSearch = () => {
     const inputValue = search.trim();
     if (inputValue?.length !== 5) {
@@ -26,14 +34,43 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <input
-        type="number"
-        placeholder="Enter a 5-digit number..."
-        value={search}
-        onChange={(event) => setSearch(event.target.value)}
-      />
-      {validation && <p>{validation}</p>}
-      <button onClick={() => handleSearch()}>Search</button>
+      <img src="/ZoeLogo.svg" alt="Zoe logo" className={styles.logo} />
+      <div className={styles.iconContainer}>
+        <img src="/icons/UserIcon.svg" alt="User icon" />
+      </div>
+      <div className={styles.titleContainer}>
+        <h1 className={typography.textXl}>Find Your Company Advisors!</h1>
+        <p className={typography.textHeader}>
+          Search by income to find your advisors.
+        </p>
+      </div>
+      <div className={styles.inputContainer}>
+        <label htmlFor="search" className={typography.textSm}>
+          Current income
+        </label>
+
+        <div className={styles.inputWrapper}>
+          <span className={styles.prefix}>$</span>
+          <input
+            type="number"
+            title="Search by income"
+            value={search}
+            onChange={(event) => handleOnChange(event)}
+            className={styles.inputSearch}
+          />
+        </div>
+        {validation && (
+          <p className={cn(typography.textSm, typography.textDanger)}>
+            {validation}
+          </p>
+        )}
+      </div>
+      <Button
+        onClick={() => handleSearch()}
+        rightIcon={<img src="/icons/SearchIcon.svg" alt="" />}
+      >
+        Search Now
+      </Button>
     </div>
   );
 }
