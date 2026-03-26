@@ -1,3 +1,4 @@
+import AdvisorsTable from "@/components/advisors/AdvisorsTable";
 import { getAdvisors } from "@/lib/advisor";
 
 export default async function AdvisorsPage({
@@ -17,22 +18,5 @@ export default async function AdvisorsPage({
     );
   }
 
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Income</th>
-        </tr>
-      </thead>
-      <tbody>
-        {advisors?.map((advisor) => (
-          <tr key={advisor?.id}>
-            <td>{advisor?.name}</td>
-            <td>${advisor?.income}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+  return <AdvisorsTable advisors={advisors} />;
 }
