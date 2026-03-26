@@ -1,17 +1,21 @@
 "use client";
-import { usePagination } from "@/hooks/usePagination";
-import { useSort } from "@/hooks/useSort";
 import { Advisor } from "@/types/advisor";
 import Paginator from "@/components/Paginator";
+import { useTableState } from "@/hooks/useTable";
 
 function AdvisorsTable({ advisors }: { advisors: Advisor[] }) {
-  const { sortedData, handleSort, sortKey, sortOrder } = useSort(
-    advisors,
-    "name",
-  );
-
-  const { paginatedData, currentPage, next, prev, hasNext, hasPrev, label } =
-    usePagination<Advisor>(sortedData);
+const {
+  data,
+  sortKey,
+  sortOrder,
+  handleSort,
+  currentPage,
+  next,
+  prev,
+  hasNext,
+  hasPrev,
+  label,
+} = useTableState(advisors, "name");
 
   return (
     <div>
@@ -27,7 +31,7 @@ function AdvisorsTable({ advisors }: { advisors: Advisor[] }) {
           </tr>
         </thead>
         <tbody>
-          {paginatedData?.map((advisor) => (
+          {data?.map((advisor) => (
             <tr key={advisor?.id}>
               <td>{advisor?.name}</td>
               <td>${advisor?.income}</td>
