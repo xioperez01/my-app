@@ -60,7 +60,7 @@
 
 /* DANGER */
 .danger.solid {
-  background: var(--color-error);
+  background: var(--color-danger);
 }
 
 .danger.solid:hover {
@@ -68,8 +68,8 @@
 }
 
 .danger.outline {
-  border-color: var(--color-error);
-  color: var(--color-error);
+  border-color: var(--color-danger);
+  color: var(--color-danger);
 }
 
 .danger.outline:hover {
@@ -77,7 +77,7 @@
 }
 
 .danger.ghost {
-  color: var(--color-error);
+  color: var(--color-danger);
 }
 
 .danger.ghost:hover {
