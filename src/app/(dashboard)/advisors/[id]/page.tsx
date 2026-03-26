@@ -61,7 +61,13 @@ export default async function AdvisorPage({
         {dataToDisplay.map((item) => (
           <div key={item.key}>
             <span>{item.label}: </span>
-            <span>{advisor[item.key] || "No data"}</span>
+            <span>
+              {advisor[item.key]
+                ? item.key === "income"
+                  ? `$${advisor[item.key]}`
+                  : advisor[item.key]
+                : "No data"}
+            </span>
           </div>
         ))}
       </div>
