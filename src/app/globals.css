@@ -1,6 +1,7 @@
 :root {
   --background: #ffffff;
   --foreground: #5f5f5f;
+  --background-light: #fbfbfd;
 
   /* COLOR PALETTE */
 
@@ -76,7 +77,7 @@ a {
 h1 {
   font-weight: 500;
   font-size: var(--font-2xl);
-  color : var(--color-text-headers);
+  color: var(--color-text-headers);
 }
 
 p {
