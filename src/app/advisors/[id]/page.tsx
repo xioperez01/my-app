@@ -1,7 +1,17 @@
-import React from "react";
+import { getAdvisorById } from "@/lib/advisor";
+import { notFound } from "next/navigation";
 
-function AdvisorPage() {
-  return <div>AdvisorPage</div>;
+export default async function AdvisorPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
+  const advisor = await getAdvisorById(id);
+  if (!advisor) {
+    notFound();
+  }
+
+  return <div>Advisor: {advisor.name}</div>;
 }
-
-export default AdvisorPage;
