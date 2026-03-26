@@ -13,7 +13,7 @@ const getAdvisors = async (income: string): Promise<Advisor[]> => {
   const res = await fetch(`${BASE_URL}/advisor`);
 
   if (!res.ok) {
-    throw new Error("Failed to fetch advisors");
+    throw new Error(`Failed to fetch advisors: ${res.status}`);
   }
 
   const fullData: Advisor[] = await res.json();
@@ -26,4 +26,17 @@ const getAdvisors = async (income: string): Promise<Advisor[]> => {
   );
 };
 
-export { getAdvisors };
+const getAdvisorById = async (id: string): Promise<Advisor | null> => {
+  const res = await fetch(`${BASE_URL}/advisor/${id}`);
+
+  if (res.status === 404) {
+    return null;
+  }
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch advisor: ${res.status}`);
+  }
+
+  return res.json();
+};
+export { getAdvisors, getAdvisorById };
