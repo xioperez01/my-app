@@ -1,0 +1,70 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  transition: all 0.2s ease;
+}
+
+/* VARIANTS */
+.solid {
+  border: none;
+  color: white;
+}
+
+.outline {
+  background: transparent;
+}
+
+/* COLOR SCHEMES */
+
+/* PRIMARY */
+.primary.solid {
+  background: var(--color-primary);
+}
+
+.primary.solid:hover {
+  background: var(--blue-500);
+}
+
+.primary.outline {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.primary.outline:hover {
+  background: var(--blue-50);
+}
+
+/* DANGER */
+.danger.solid {
+  background: var(--color-error);
+}
+
+.danger.solid:hover {
+  opacity: 0.9;
+}
+
+.danger.outline {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.danger.outline:hover {
+  background: rgba(246, 117, 116, 0.1);
+}
+
+/* ICON */
+.icon {
+  display: flex;
+  align-items: center;
+}
