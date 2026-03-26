@@ -1,0 +1,90 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  width: 100%;
+  max-width: 1024px;
+  background-color: white;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.topContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: start;
+  justify-content: space-between;
+  flex-wrap: wrap-reverse;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.actionsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap-reverse;
+}
+
+.primaryInfoContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.rowContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.rowContainer span {
+  font-size: var(--font-sm);
+}
+
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dataContainer div {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0px;
+}
+
+.dataContainer div span:first-of-type {
+  font-weight: 500;
+  color: var(--color-text-headers);
+  font-size: var(--font-lg);
+}
+
+@media (max-width: 659px) {
+  .root {
+    padding: 20px 0px;
+  }
+  .topContainer {
+    align-items: center;
+    justify-content: center;
+  }
+  .actionsContainer {
+    justify-content: center;
+  }
+
+  .dataContainer div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
