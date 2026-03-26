@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+  gap: 16px;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+}
+
+@media (max-width: 659px) {
+  .headerContainer {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
