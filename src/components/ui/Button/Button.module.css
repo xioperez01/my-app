@@ -25,6 +25,11 @@
   background: transparent;
 }
 
+.ghost {
+  background: transparent;
+  border: none;
+}
+
 /* COLOR SCHEMES */
 
 /* PRIMARY */
@@ -42,6 +47,14 @@
 }
 
 .primary.outline:hover {
+  background: var(--blue-50);
+}
+
+.primary.ghost {
+  color: var(--color-primary);
+}
+
+.primary.ghost:hover {
   background: var(--blue-50);
 }
 
@@ -63,8 +76,48 @@
   background: rgba(246, 117, 116, 0.1);
 }
 
+.danger.ghost {
+  color: var(--color-error);
+}
+
+.danger.ghost:hover {
+  background: rgba(246, 117, 116, 0.1);
+}
+
+/* NEUTRAL */
+.neutral.solid {
+  background: var(--color-gray-100);
+  color: var(--color-gray-700);
+}
+
+.neutral.solid:hover {
+  background: var(--color-gray-200);
+}
+
+.neutral.outline {
+  border-color: var(--color-gray-300);
+  color: var(--color-gray-700);
+}
+
+.neutral.outline:hover {
+  background: var(--color-gray-100);
+}
+
+.neutral.ghost {
+  color: var(--color-gray-700);
+}
+
+.neutral.ghost:hover {
+  background: var(--color-gray-100);
+}
+
 /* ICON */
 .icon {
   display: flex;
   align-items: center;
+}
+
+/* OPTIONAL: compact ghost buttons */
+.button.ghost {
+  padding: 8px 12px;
 }

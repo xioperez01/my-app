@@ -3,8 +3,8 @@ import styles from "./Button.module.css";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: "solid" | "outline";
-  colorScheme?: "primary" | "danger";
+  variant?: "solid" | "outline" | "ghost";
+  colorScheme?: "primary" | "danger" | "neutral";
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
 }
