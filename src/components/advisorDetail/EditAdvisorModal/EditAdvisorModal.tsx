@@ -14,13 +14,14 @@ import styles from "./EditAdvisorModal.module.css";
 import Image from "next/image";
 import { validateAdvisor } from "@/utils/advisor";
 import typography from "@/styles/typography.module.css";
-import { updateAdvisor } from "@/lib/advisor";
 import { useRouter } from "next/navigation";
 import UploadIcon from "@/components/icons/UploadIcon";
 import EditIcon from "@/components/icons/EditIcon";
+import { createAdvisor, updateAdvisor } from "@/lib/advisor";
+import PlusIcon from "@/components/icons/PlusIcon";
 
 type Props = {
-  advisor: Advisor;
+  advisor?: Advisor;
 };
 
 const dataToDisplay: {
@@ -37,12 +38,15 @@ const dataToDisplay: {
   { key: "title", label: "Title" },
 ];
 
-export default function EditAdvisorModal({ advisor }: Props) {
+export default function AdvisorModal({ advisor }: Props) {
   const router = useRouter();
+  const isEditMode = !!advisor;
+
   const [isOpen, setIsOpen] = React.useState(false);
 
   const [form, setForm] = React.useState<
     Partial<CreateAdvisorDTO> & {
+      avatarFile?: File | null;
       avatarPreview?: string | null;
       removeAvatar?: boolean;
     }
@@ -64,16 +68,26 @@ export default function EditAdvisorModal({ advisor }: Props) {
   };
 
   useEffect(() => {
-    if (isOpen && advisor) {
-      const [firstName, ...rest] = advisor.name.split(" ");
+    if (isOpen) {
+      if (advisor) {
+        const [firstName, ...rest] = advisor.name.split(" ");
 
-      setForm({
-        ...advisor,
-        firstName,
-        lastName: rest.join(" "),
-        avatarPreview: null,
-        removeAvatar: false,
-      });
+        setForm({
+          ...advisor,
+          firstName,
+          lastName: rest.join(" "),
+          avatarPreview: null,
+          avatarFile: null,
+          removeAvatar: false,
+        });
+      } else {
+        setForm({
+          firstName: "",
+          lastName: "",
+          email: "",
+          income: undefined,
+        });
+      }
     }
   }, [isOpen, advisor]);
 
@@ -85,14 +99,8 @@ export default function EditAdvisorModal({ advisor }: Props) {
     };
   }, [form.avatarPreview]);
 
-  const handleChange = (
-    key: keyof CreateAdvisorDTO,
-    value: string | number,
-  ) => {
-    setForm((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+  const handleChange = (key: keyof CreateAdvisorDTO, value: any) => {
+    setForm((prev) => ({ ...prev, [key]: value }));
 
     setErrors((prev) => ({
       ...prev,
@@ -105,6 +113,7 @@ export default function EditAdvisorModal({ advisor }: Props) {
 
     setForm((prev) => ({
       ...prev,
+      avatarFile: file,
       avatarPreview: preview,
       removeAvatar: false,
     }));
@@ -113,6 +122,7 @@ export default function EditAdvisorModal({ advisor }: Props) {
   const handleRemoveImage = () => {
     setForm((prev) => ({
       ...prev,
+      avatarFile: null,
       avatarPreview: null,
       removeAvatar: true,
     }));
@@ -131,15 +141,22 @@ export default function EditAdvisorModal({ advisor }: Props) {
       setSaving(true);
       setErrors({});
 
-      await updateAdvisor(advisor.id, form);
+      const result = isEditMode
+        ? await updateAdvisor(advisor!.id, form)
+        : await createAdvisor(form);
 
       router.refresh();
+
       setIsOpen(false);
+
+      if (!isEditMode) {
+        router.push(`/advisors/${result.id}`);
+      }
     } catch (error) {
       if (error instanceof Error) {
         setErrors({ general: error.message });
       } else {
-        setErrors({ general: "Error updating advisor." });
+        setErrors({ general: "Something went wrong." });
       }
     } finally {
       setSaving(false);
@@ -149,16 +166,18 @@ export default function EditAdvisorModal({ advisor }: Props) {
   return (
     <Fragment>
       <Button
-        leftIcon={<EditIcon />}
-        variant="outline"
+        leftIcon={isEditMode ? <EditIcon /> : <PlusIcon />}
+        variant={isEditMode ? "outline" : "solid"}
         colorScheme="primary"
         onClick={handleOpenModal}
       >
-        Edit Advisor
+        {isEditMode ? "Edit Advisor" : "Add Advisor"}
       </Button>
 
       <Modal isOpen={isOpen} onClose={handleClose}>
-        <ModalHeader>Edit Advisor Information</ModalHeader>
+        <ModalHeader>
+          {isEditMode ? "Edit Advisor" : "Create Advisor"}
+        </ModalHeader>
 
         <ModalBody>
           <div className={styles.container}>
@@ -169,7 +188,7 @@ export default function EditAdvisorModal({ advisor }: Props) {
                   className={styles.avatar}
                   alt="preview"
                 />
-              ) : advisor.avatar && !form.removeAvatar ? (
+              ) : advisor?.avatar && !form.removeAvatar ? (
                 <Image
                   src={advisor.avatar}
                   alt={advisor.name}
@@ -180,7 +199,7 @@ export default function EditAdvisorModal({ advisor }: Props) {
               ) : (
                 <div className={styles.avatarFallback}>
                   <span className={typography.text2Xl}>
-                    {advisor.name?.[0]}
+                    {form.firstName?.[0] || "N A"}
                   </span>
                 </div>
               )}
@@ -229,6 +248,7 @@ export default function EditAdvisorModal({ advisor }: Props) {
                   error={errors[key]}
                   disabled={saving}
                   required={required}
+                  type={key === "income" ? "number" : "text"}
                 />
               ))}
             </div>
@@ -261,7 +281,7 @@ export default function EditAdvisorModal({ advisor }: Props) {
             onClick={handleClose}
             disabled={saving}
           >
-            Go Back
+            Cancel
           </Button>
 
           <Button
@@ -270,7 +290,13 @@ export default function EditAdvisorModal({ advisor }: Props) {
             onClick={handleSubmit}
             disabled={saving}
           >
-            {saving ? "Saving..." : "Save Changes"}
+            {saving
+              ? isEditMode
+                ? "Saving..."
+                : "Creating..."
+              : isEditMode
+                ? "Save Changes"
+                : "Create Advisor"}
           </Button>
         </ModalFooter>
       </Modal>
