@@ -25,6 +25,16 @@
   width: 112px;
 }
 
+.avatarFallback {
+  height: 112px;
+  width: 112px;
+  border-radius: 50%;
+  background-color: var(--blue-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .actionsContainer {
   display: flex;
   flex-direction: row;

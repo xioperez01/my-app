@@ -7,6 +7,7 @@ import BagIcon from "@/components/icons/BagIcon";
 import { Advisor } from "@/types/advisor";
 import EditAdvisorModal from "@/components/advisorDetail/EditAdvisorModal/EditAdvisorModal";
 import DeleteAdvisorModal from "@/components/advisorDetail/DeleteAdvisorModal/DeleteAdvisorModal";
+import typography from "@/styles/typography.module.css";
 
 const dataToDisplay: { key: keyof Advisor; label: string }[] = [
   { key: "idNumber", label: "ID Number" },
@@ -33,13 +34,21 @@ export default async function AdvisorPage({
   return (
     <div className={styles.root}>
       <div className={styles.topContainer}>
-        <Image
-          src={advisor.avatar}
-          alt={advisor.name}
-          width={112}
-          height={112}
-          className={styles.avatar}
-        />
+        {advisor.avatar ? (
+          <Image
+            src={advisor.avatar}
+            alt={advisor.name}
+            width={112}
+            height={112}
+            className={styles.avatar}
+          />
+        ) : (
+          <div className={styles.avatarFallback}>
+            <span className={typography.text2Xl}>
+              {advisor.name?.[0] || "N A"}
+            </span>
+          </div>
+        )}
         <div className={styles.actionsContainer}>
           <DeleteAdvisorModal advisor={advisor} />
           <EditAdvisorModal advisor={advisor} />
