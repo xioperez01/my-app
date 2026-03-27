@@ -22,9 +22,13 @@ const validateAdvisor = (
       }
     }
 
-    if (key === "income" && value) {
-      if (isNaN(Number(value))) {
-        errors[key] = "Must be a number";
+    if (key === "income") {
+      const stringValue = String(value);
+
+      if (!stringValue) {
+        errors[key] = "Income is required";
+      } else if (stringValue.length !== 5) {
+        errors[key] = "Income must be exactly 5 digits";
       }
     }
   });
