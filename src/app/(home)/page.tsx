@@ -1,13 +1,13 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { buildSearchParams, cn } from "@/utils";
 import typography from "@/styles/typography.module.css";
 import { Button } from "@/components/ui/Button/Button";
 import UserIcon from "@/components/icons/UserIcon";
 
-export default function Home() {
+function HomeContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [search, setSearch] = useState("");
@@ -75,5 +75,13 @@ export default function Home() {
         Search Now
       </Button>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={null}>
+      <HomeContent />
+    </Suspense>
   );
 }
