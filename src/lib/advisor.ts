@@ -64,6 +64,7 @@ const updateAdvisor = async (
   // It's necessary to handle avatar separately because it needs to be sent as FormData
 
   const clearData = { ...data };
+  delete clearData.avatarFile;
   delete clearData.avatarPreview;
   delete clearData.removeAvatar;
 
@@ -98,4 +99,39 @@ const deleteAdvisor = async (id: string): Promise<void> => {
   }
 };
 
-export { getAdvisors, getAdvisorById, updateAdvisor, deleteAdvisor };
+const createAdvisor = async (
+  data: Partial<CreateAdvisorDTO> & {
+    avatarFile?: File | null;
+    avatarPreview?: string | null;
+  },
+): Promise<Advisor> => {
+  // It's necessary to handle avatar separately because it needs to be sent as FormData
+
+  const clearData = { ...data };
+  delete clearData.avatarPreview;
+  delete clearData.avatarFile;
+
+  const payload = buildPayload(clearData as CreateAdvisorDTO);
+
+  const res = await fetch(`${BASE_URL}/advisor`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to create advisor");
+  }
+
+  return res.json();
+};
+
+export {
+  getAdvisors,
+  getAdvisorById,
+  updateAdvisor,
+  deleteAdvisor,
+  createAdvisor,
+};
