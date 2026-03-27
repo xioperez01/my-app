@@ -68,7 +68,7 @@ I’d also add a few small improvements:
 - Confirmation messages when editing or deleting
 - Better use of Next.js loading components (they’re already implemented, but could be improved with skeletons or clearer states)
 
-With these changes, the app would feel more practical and efficient, especially for quick and repetitive tasks.With these changes, the app would feel more practical and efficient, especially for quick and repetitive tasks.
+With these changes, the app would feel more practical and efficient, especially for quick and repetitive tasks.
 
 ## Autors :ribbon:
 
