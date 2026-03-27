@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button/Button";
 import LocationIcon from "@/components/icons/LocationIcon";
 import BagIcon from "@/components/icons/BagIcon";
 import { Advisor } from "@/types/advisor";
+import EditAdvisorModal from "@/components/advisorDetail/EditAdvisorModal/EditAdvisorModal";
 
 const dataToDisplay: { key: keyof Advisor; label: string }[] = [
   { key: "idNumber", label: "ID Number" },
@@ -24,6 +25,7 @@ export default async function AdvisorPage({
   const { id } = await params;
 
   const advisor = await getAdvisorById(id);
+
   if (!advisor) {
     notFound();
   }
@@ -40,9 +42,7 @@ export default async function AdvisorPage({
         />
         <div className={styles.actionsContainer}>
           <Button colorScheme="danger">Delete</Button>
-          <Button variant="outline" colorScheme="primary">
-            Edit Advisor
-          </Button>
+          <EditAdvisorModal advisor={advisor} />
         </div>
       </div>
       <div className={styles.primaryInfoContainer}>
