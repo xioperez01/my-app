@@ -83,6 +83,85 @@
   font-size: var(--font-lg);
 }
 
+.avatarSkeleton {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: var(--color-border);
+  animation: pulse 1.5s infinite;
+}
+
+.buttonSkeleton {
+  width: 120px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--color-border);
+  animation: pulse 1.5s infinite;
+}
+
+.titleSkeleton {
+  width: 220px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--color-border);
+  animation: pulse 1.5s infinite;
+  margin-bottom: 12px;
+}
+
+.rowSkeleton {
+  width: 180px;
+  height: 16px;
+  border-radius: 6px;
+  background: var(--color-border);
+  animation: pulse 1.5s infinite;
+  margin-bottom: 8px;
+}
+
+.dataRowSkeleton {
+  width: 100%;
+  height: 20px;
+  border-radius: 6px;
+  background: var(--color-border);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.notFoundContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  gap: 16px;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  gap: 16px;
+}
+
+.errorActions {
+  display: flex;
+  gap: 12px;
+}
+
 @media (max-width: 659px) {
   .root {
     padding: 20px 0px;
