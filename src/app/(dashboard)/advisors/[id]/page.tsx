@@ -2,11 +2,11 @@ import { getAdvisorById } from "@/lib/advisor";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import Image from "next/image";
-import { Button } from "@/components/ui/Button/Button";
 import LocationIcon from "@/components/icons/LocationIcon";
 import BagIcon from "@/components/icons/BagIcon";
 import { Advisor } from "@/types/advisor";
 import EditAdvisorModal from "@/components/advisorDetail/EditAdvisorModal/EditAdvisorModal";
+import DeleteAdvisorModal from "@/components/advisorDetail/DeleteAdvisorModal/DeleteAdvisorModal";
 
 const dataToDisplay: { key: keyof Advisor; label: string }[] = [
   { key: "idNumber", label: "ID Number" },
@@ -41,7 +41,7 @@ export default async function AdvisorPage({
           className={styles.avatar}
         />
         <div className={styles.actionsContainer}>
-          <Button colorScheme="danger">Delete</Button>
+          <DeleteAdvisorModal advisor={advisor} />
           <EditAdvisorModal advisor={advisor} />
         </div>
       </div>
