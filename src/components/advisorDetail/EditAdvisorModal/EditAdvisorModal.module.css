@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 16px;
+}
+
+.topContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: contain;
+  height: 112px;
+  width: 112px;
+}
+
+.avatarFallback {
+  height: 112px;
+  width: 112px;
+  border-radius: 50%;
+  background-color: var(--blue-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap-reverse;
+}
+
+.inputsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.errorText {
+  color: var(--color-danger);
+}
+
+@media (max-width: 659px) {
+  .inputsContainer {
+    grid-template-columns: 1fr;
+  }
+}

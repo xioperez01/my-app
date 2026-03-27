@@ -6,6 +6,15 @@ interface Advisor {
   avatar: string;
   email: string;
   phone: string;
+  idNumber?: string;
+  education?: string;
+  experienceYears?: string;
+  title?: string;
 }
 
-export type { Advisor };
+interface CreateAdvisorDTO extends Omit<Advisor, "id" | "name"> {
+  firstName: string;
+  lastName: string;
+}
+
+export type { Advisor, CreateAdvisorDTO };

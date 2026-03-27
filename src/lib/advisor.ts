@@ -1,4 +1,4 @@
-import { Advisor } from "@/types/advisor";
+import { Advisor, CreateAdvisorDTO } from "@/types/advisor";
 
 const BASE_URL = "http://localhost:3001";
 const RANGE = 10000;
@@ -39,4 +39,99 @@ const getAdvisorById = async (id: string): Promise<Advisor | null> => {
 
   return res.json();
 };
-export { getAdvisors, getAdvisorById };
+
+const buildPayload = (data: CreateAdvisorDTO) => {
+  const { firstName, lastName, ...rest } = data;
+
+  return {
+    ...rest,
+    name: `${firstName} ${lastName}`.trim(),
+  };
+};
+
+const updateAdvisor = async (
+  id: string,
+  data: Partial<CreateAdvisorDTO> & {
+    avatarFile?: File | null;
+    avatarPreview?: string | null;
+    removeAvatar?: boolean;
+  },
+): Promise<Advisor> => {
+  if (!id) {
+    throw new Error("Advisor id is required");
+  }
+
+  // It's necessary to handle avatar separately because it needs to be sent as FormData
+
+  const clearData = { ...data };
+  delete clearData.avatarFile;
+  delete clearData.avatarPreview;
+  delete clearData.removeAvatar;
+
+  const payload = buildPayload(clearData as CreateAdvisorDTO);
+
+  const res = await fetch(`${BASE_URL}/advisor/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to update advisor");
+  }
+
+  return res.json();
+};
+
+const deleteAdvisor = async (id: string): Promise<void> => {
+  if (!id) {
+    throw new Error("Advisor id is required");
+  }
+
+  const res = await fetch(`${BASE_URL}/advisor/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to delete advisor");
+  }
+};
+
+const createAdvisor = async (
+  data: Partial<CreateAdvisorDTO> & {
+    avatarFile?: File | null;
+    avatarPreview?: string | null;
+  },
+): Promise<Advisor> => {
+  // It's necessary to handle avatar separately because it needs to be sent as FormData
+
+  const clearData = { ...data };
+  delete clearData.avatarPreview;
+  delete clearData.avatarFile;
+
+  const payload = buildPayload(clearData as CreateAdvisorDTO);
+
+  const res = await fetch(`${BASE_URL}/advisor`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to create advisor");
+  }
+
+  return res.json();
+};
+
+export {
+  getAdvisors,
+  getAdvisorById,
+  updateAdvisor,
+  deleteAdvisor,
+  createAdvisor,
+};

@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.warning {
+  font-size: var(--font-sm);
+  font-weight: 500;
+}
+
+.advisorInfo {
+  padding: 12px;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.description {
+  font-size: var(--font-xs);
+  color: var(--color-text-secondary);
+}
+
+.errorText {
+  color: var(--color-danger);
+  font-size: var(--font-xs);
+}

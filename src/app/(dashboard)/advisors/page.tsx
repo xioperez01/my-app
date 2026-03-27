@@ -2,7 +2,8 @@ import AdvisorsEmpty from "@/components/advisors/AdvisorsEmpty/AdvisorsEmpty";
 import AdvisorsTable from "@/components/advisors/AdvisorsTable/AdvisorsTable";
 import { getAdvisors } from "@/lib/advisor";
 import styles from "./page.module.css";
-import { Button } from "@/components/ui/Button/Button";
+
+import EditAdvisorModal from "@/components/advisorDetail/EditAdvisorModal/EditAdvisorModal";
 
 export default async function AdvisorsPage({
   searchParams,
@@ -20,7 +21,7 @@ export default async function AdvisorsPage({
     <div className={styles.container}>
       <div className={styles.headerContainer}>
         <h1>Advisors</h1>
-        <Button>Hola</Button>
+        <EditAdvisorModal />
       </div>
       <AdvisorsTable advisors={advisors} />
     </div>
