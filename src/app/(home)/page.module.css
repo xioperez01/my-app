@@ -26,6 +26,10 @@
   text-align: center;
 }
 
+.titleContainer p:first-of-type {
+  font-weight: 500;
+}
+
 .inputContainer {
   width: 100%;
   max-width: 350px;

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { buildSearchParams, cn } from "@/utils";
 import typography from "@/styles/typography.module.css";
 import { Button } from "@/components/ui/Button/Button";
+import UserIcon from "@/components/icons/UserIcon";
 
 export default function Home() {
   const router = useRouter();
@@ -36,10 +37,12 @@ export default function Home() {
     <div className={styles.page}>
       <img src="/ZoeLogo.svg" alt="Zoe logo" className={styles.logo} />
       <div className={styles.iconContainer}>
-        <img src="/icons/UserIcon.svg" alt="User icon" />
+        <UserIcon />
       </div>
       <div className={styles.titleContainer}>
-        <h1 className={typography.textXl}>Find Your Company Advisors!</h1>
+        <p className={cn(typography.textXl, typography.textHeader)}>
+          Find Your Company Advisors!
+        </p>
         <p className={typography.textHeader}>
           Search by income to find your advisors.
         </p>
