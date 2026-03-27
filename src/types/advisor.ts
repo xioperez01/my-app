@@ -12,4 +12,9 @@ interface Advisor {
   title?: string;
 }
 
-export type { Advisor };
+interface CreateAdvisorDTO extends Omit<Advisor, "id" | "name"> {
+  firstName: string;
+  lastName: string;
+}
+
+export type { Advisor, CreateAdvisorDTO };
