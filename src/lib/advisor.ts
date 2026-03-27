@@ -84,4 +84,18 @@ const updateAdvisor = async (
   return res.json();
 };
 
-export { getAdvisors, getAdvisorById, updateAdvisor };
+const deleteAdvisor = async (id: string): Promise<void> => {
+  if (!id) {
+    throw new Error("Advisor id is required");
+  }
+
+  const res = await fetch(`${BASE_URL}/advisor/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to delete advisor");
+  }
+};
+
+export { getAdvisors, getAdvisorById, updateAdvisor, deleteAdvisor };
