@@ -18,6 +18,49 @@
   gap: 16px;
 }
 
+.titleSkeleton {
+  width: 180px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--color-border);
+  animation: pulse 1.5s infinite;
+}
+
+.buttonSkeleton {
+  width: 140px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--color-border);
+  animation: pulse 1.5s infinite;
+}
+
+.tableSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.rowSkeleton {
+  width: 100%;
+  height: 56px;
+  border-radius: 8px;
+  background: var(--color-border);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
 @media (max-width: 659px) {
   .headerContainer {
     flex-direction: column;
