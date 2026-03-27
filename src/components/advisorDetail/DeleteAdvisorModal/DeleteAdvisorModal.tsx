@@ -40,8 +40,8 @@ function DeleteAdvisorModal({ advisor }: Props) {
       await deleteAdvisor(advisor.id);
 
       setIsOpen(false);
+      router.back();
       router.refresh();
-      router.push("/");
     } catch (err) {
       setError("Failed to delete advisor. Please try again.");
       setSaving(false);
