@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
+import { Noto_Serif_TC } from "next/font/google";
 import "./globals.css";
+
+const notoSerif = Noto_Serif_TC({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-noto-serif",
+});
 
 const rubik = Rubik({
   subsets: ["latin"],
@@ -19,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={rubik.variable}>{children}</body>
+    <html lang="en" className={`${rubik.variable} ${notoSerif.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
